@@ -42,3 +42,5 @@ func main() {
 	s := []int{1, 2, 54, 101, 4, 1}
 	fmt.Println(find(s, 23))
 }
+
+//O(log(n))
