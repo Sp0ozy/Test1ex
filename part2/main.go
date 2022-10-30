@@ -6,6 +6,7 @@ func partition(s []int) (i int) {
 	l, r := 0, len(s)-1
 	p := s[r/2]
 	for {
+		fmt.Println(s)
 		for s[l] < p {
 			l++
 		}
@@ -18,25 +19,26 @@ func partition(s []int) (i int) {
 		s[l], s[r] = s[r], s[l]
 		l++
 		r--
-		fmt.Println(s)
+
 	}
 }
-func sort(s []int) {
-	if len(s) < 2 {
-		return
-	}
-	p := partition(s) + 1
-	sort(s[:p])
-	sort(s[p:])
-}
-func find(s []int, i int) int {
-	if s == nil || len(s)-1 < i {
+func find(s []int, n int) int {
+	if len(s)-1 < n || s == nil {
 		return 0
 	}
-	sort(s)
-	return s[i]
+	if len(s) < 2 {
+		return s[0]
+	}
+	p := partition(s) + 1
+	if n >= p {
+		fmt.Println(p, n, "bigger")
+		return find(s[p:], n-p)
+	} else {
+		fmt.Println(p, n, "smaller")
+		return find(s[:p], n)
+	}
 }
 func main() {
 	s := []int{1, 2, 54, 101, 4, 1}
-	find(s, 5)
+	fmt.Println(find(s, 23))
 }
